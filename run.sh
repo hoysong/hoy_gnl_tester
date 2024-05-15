@@ -1,10 +1,13 @@
+clear
+echo
+
 USER=`whoami`
 echo -e "\e[32m                 _..,rO@@hrr=====\e[0m."
 echo -e "\e[32m            {kP''                 .e[0m."
 echo -e "\e[32m         .i(                          j\      __.::^^^^::.. \e[0m"
 echo -e "\e[32m        .n                             .-  +Z'                +h>' \e[0m"
-echo -e "\e[32m        {         hey tester            O                          /_' \e[0m"
-echo -e "\e[32m                                       .;                             _,. \e[0m"
+echo -e "\e[32m        {       hey, hoy_tester         O                          /_' \e[0m"
+echo -e "\e[32m        l                              .;                             _,. \e[0m"
 echo -e "\e[32m        z                           ^./.                                 ?l \e[0m"
 echo -e "\e[32m         +.                      I.C                                       ~. \e[0m"
 echo -e "\e[32m           )l_               .+J  .-          $USER 어서오고                :: \e[0m"
