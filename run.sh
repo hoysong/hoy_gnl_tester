@@ -55,6 +55,7 @@ echo -e "\e[32m             1          z   p                                1 . 
 
 rm result.txt
 bash launch.sh > result.txt
+clear
 cat result.txt
 
 echo -e "\e[32m.__                       __                   __\e[0m"
