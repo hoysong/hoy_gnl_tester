@@ -34,11 +34,4 @@ int	main(void)
 		printf("%s", str);
 		free(str);
 	}
-
-	fd = open("cases/others/", O_RDONLY);
-	while ((str = get_next_line(fd)) != NULL)
-	{
-		printf("%s", str);
-		free(str);
-	}
 }
