@@ -62,3 +62,26 @@ No_leaks!
 
 [32mSIZE=2[0m
 No_leaks!
+[34mDiff_ok[0m
+
+[32mSIZE=3[0m
+No_leaks!
+[34mDiff_ok[0m
+
+[32mSIZE=4[0m
+No_leaks!
+[34mDiff_ok[0m
+
+[32mSIZE=5[0m
+No_leaks!
+[34mDiff_ok[0m
+
+[32mSIZE=6[0m
+No_leaks!
+[34mDiff_ok[0m
+
+[32mSIZE=7[0m
+No_leaks!
+[34mDiff_ok[0m
+
+[32mSIZE=8[0m

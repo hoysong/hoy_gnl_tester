@@ -9,7 +9,7 @@ echo -e "\e[32m        z                           ^./.                         
 echo -e "\e[32m         +.                      I.C                                       ~. \e[0m"
 echo -e "\e[32m           )l_               .+J  .-          $USER 어서오고                :: \e[0m"
 echo -e "\e[32m              +asdllc~cJJu.=P    .r                                          ) \e[0m"
-echo -e "\e[32m                   +r            .^           컴파일 얌전히 기다리리고       ~ \e[0m"
+echo -e "\e[32m                   +r            .^           컴파일 얌전히 기다리라고       ~ \e[0m"
 echo -e "\e[32m                   x             ..                                         II \e[0m"
 echo -e "\e[32m                                  .~                                       Ii \e[0m"
 echo -e "\e[32m                                    r:                                   j. \e[0m"
