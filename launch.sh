@@ -55,9 +55,9 @@ do
 	cat prog_output -e > prog_output_e
 	DIFF_RESULT=`diff origin_output prog_output_e | wc -l`
 	if [ ${DIFF_RESULT} -eq 0 ]; then
-		echo Diff_ok!
+		echo -e "\e[34mDiff_ok\e[0m"
 	else
-		echo DIFF_KO
+		echo -e "\e[31mDiff_KO\e[0m"
 	fi
 	rm log_buff_file prog_output origin_output prog_output_e
 	((SIZE++))
@@ -81,9 +81,9 @@ do
 	cat prog_output -e > prog_output_e
 	DIFF_RESULT=`diff origin_output prog_output_e | wc -l`
 	if [ ${DIFF_RESULT} -eq 0 ]; then
-		echo Diff_ok!
+		echo -e "\e[34mDiff_ok\e[0m"
 	else
-		echo DIFF_KO
+		echo -e "\e[31mDiff_KO\e[0m"
 	fi
 	rm log_buff_file prog_output origin_output prog_output_e
 	((SIZE++))
@@ -107,9 +107,9 @@ do
 	cat prog_output -e > prog_output_e
 	DIFF_RESULT=`diff origin_output prog_output_e | wc -l`
 	if [ ${DIFF_RESULT} -eq 0 ]; then
-		echo Diff_ok!
+		echo -e "\e[34mDiff_ok\e[0m"
 	else
-		echo DIFF_KO
+		echo -e "\e[31mDiff_KO\e[0m"
 	fi
 	rm log_buff_file prog_output origin_output prog_output_e
 	((SIZE++))
