@@ -1,6 +1,6 @@
 clear
 echo
-
+echo -e "\e[47;34mGNL_TESTER\e[0m"
 USER=`whoami`
 echo -e "\e[32m                   _..,rO@@hrr=====\e[0m."
 echo -e "\e[32m              {kP''                 .e[0m."
@@ -12,7 +12,7 @@ echo -e "\e[32m          z                           ^./.                       
 echo -e "\e[32m           +.                      I.C                                       ~. \e[0m"
 echo -e "\e[32m             )l_               .+J  .-          $USER 어서오고                :: \e[0m"
 echo -e "\e[32m                +asdllc~cJJu.=P    .r                                          ) \e[0m"
-echo -e "\e[32m                     +r            .^           컴파일 얌전히 기다리라고       ~ \e[0m"
+echo -e "\e[32m                     +r            .^           컴파일 얌전히 기다리도록 해.    ~ \e[0m"
 echo -e "\e[32m                     x             ..                                         II \e[0m"
 echo -e "\e[32m                                    .~                                       Ii \e[0m"
 echo -e "\e[32m                                      r:                                   j. \e[0m"
@@ -64,3 +64,7 @@ echo -e "\e[32m|   Y  (  <_> )___  |    |  | \  ___/ \___ \  |  | \  ___/|  | \/
 echo -e "\e[32m|___|  /\____// ____|____|__|  \___  >____  > |__|  \___  >__|\e[0m"
 echo -e "\e[32m     \/       \/   /_____/         \/     \/            \/\e[0m"
 rm a.out
+
+echo -e "\e[47;34m\e[1m"
+echo -e "\e[32mNOMINETTE\e[0m"
+norminette ../get_next_line.c ../get_next_line_utils.c ../get_next_line.h

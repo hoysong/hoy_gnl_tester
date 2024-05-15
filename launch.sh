@@ -11,9 +11,8 @@ LEAK=" ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)"
 SIZE=0
 COUNT=12
 
-rm log_buff_file prog_output origin_output prog_output_e
-
-echo -e "\e[43;31mnl_main.c_test\e[0m"
+echo -e "\e[47;34m\e[1m"
+echo -e "\e[47;34mnl_main.c_test\e[0m"
 while [ $SIZE -le $COUNT ]
 do
 	echo -e "\e[32mSIZE=$SIZE\e[0m"
@@ -39,7 +38,8 @@ do
 done
 SIZE=0
 
-echo -e "\e[43;31mno_nl_main.c_test\e[0m"
+echo -e "\e[47;34m\e[1m"
+echo -e "\e[47;34mno_nl_main.c_test\e[0m"
 while [ $SIZE -le $COUNT ]
 do
 	echo -e "\e[32mSIZE=$SIZE\e[0m"
@@ -65,7 +65,8 @@ do
 done
 SIZE=0
 
-echo -e "\e[43;31mnl_btw_str_main.c_test\e[0m"
+echo -e "\e[47;34m\e[1m"
+echo -e "\e[47;34mnl_btw_str_main.c_test\e[0m"
 while [ $SIZE -le $COUNT ]
 do
 	echo -e "\e[32mSIZE=$SIZE\e[0m"
@@ -91,7 +92,8 @@ do
 done
 SIZE=0
 
-echo -e "\e[43;31mothers_main.c_test\e[0m"
+echo -e "\e[47;34m\e[1m"
+echo -e "\e[47;34mothers_main.c_test\e[0m"
 while [ $SIZE -le 5 ]
 do
 	echo -e "\e[32mSIZE=$SIZE\e[0m"
@@ -117,7 +119,8 @@ do
 done
 SIZE=0
 
-echo -e "\e[43;31minvaild_fd.c_test\e[0m"
+echo -e "\e[47;34m\e[1m"
+echo -e "\e[47;34minvaild_fd.c_test\e[0m"
 while [ $SIZE -le 5 ]
 do
 	echo -e "\e[32mSIZE=$SIZE\e[0m"
