@@ -1,0 +1,14 @@
+[43;31mnl_main.c_test[0m
+[32mSIZE=0[0m
+No_leaks!
+Diff_ok!
+
+[32mSIZE=1[0m
+No_leaks!
+Diff_ok!
+
+[32mSIZE=2[0m
+No_leaks!
+Diff_ok!
+
+[32mSIZE=3[0m
