@@ -24,7 +24,6 @@ if [ "${LEAK_RESULT}" = "${LEAK}" ];then
 else
 	cat log_buff_file
 fi
-cat cases/nl/* -e > origin_output
 cat prog_output -e > prog_output_e
 DIFF_RESULT=`cat prog_output_e | wc -l`
 if [ ${DIFF_RESULT} -eq 0 ]; then
@@ -32,7 +31,7 @@ if [ ${DIFF_RESULT} -eq 0 ]; then
 else
 	echo -e "\e[31mDiff_KO\e[0m"
 fi
-rm log_buff_file prog_output origin_output prog_output_e
+rm log_buff_file prog_output prog_output_e
 
 echo -e "\e[;32mno_nl_main.c_test\e[0m"
 cc mains/no_nl_main.c $BF$SIZE $CFILES $FLAGS -g
@@ -43,7 +42,6 @@ if [ "${LEAK_RESULT}" = "${LEAK}" ];then
 else
 	cat log_buff_file
 fi
-cat cases/nl/* -e > origin_output
 cat prog_output -e > prog_output_e
 DIFF_RESULT=`cat prog_output_e | wc -l`
 if [ ${DIFF_RESULT} -eq 0 ]; then
@@ -51,7 +49,7 @@ if [ ${DIFF_RESULT} -eq 0 ]; then
 else
 	echo -e "\e[31mDiff_KO\e[0m"
 fi
-rm log_buff_file prog_output origin_output prog_output_e
+rm log_buff_file prog_output prog_output_e
 
 echo -e "\e[;32mnl_btw_str_main.c_test\e[0m"
 cc mains/nl_btw_str_main.c $BF$SIZE $CFILES $FLAGS -g
@@ -62,7 +60,6 @@ if [ "${LEAK_RESULT}" = "${LEAK}" ];then
 else
 	cat log_buff_file
 fi
-cat cases/nl/* -e > origin_output
 cat prog_output -e > prog_output_e
 DIFF_RESULT=`cat prog_output_e | wc -l`
 if [ ${DIFF_RESULT} -eq 0 ]; then
@@ -70,7 +67,7 @@ if [ ${DIFF_RESULT} -eq 0 ]; then
 else
 	echo -e "\e[31mDiff_KO\e[0m"
 fi
-rm log_buff_file prog_output origin_output prog_output_e
+rm log_buff_file prog_output prog_output_e
 
 echo -e "\e[;32mothers_main.c_test\e[0m"
 cc mains/others_main.c $BF$SIZE $CFILES $FLAGS -g
@@ -81,7 +78,6 @@ if [ "${LEAK_RESULT}" = "${LEAK}" ];then
 else
 	cat log_buff_file
 fi
-cat cases/nl/* -e > origin_output
 cat prog_output -e > prog_output_e
 DIFF_RESULT=`cat prog_output_e | wc -l`
 if [ ${DIFF_RESULT} -eq 0 ]; then
@@ -89,7 +85,7 @@ if [ ${DIFF_RESULT} -eq 0 ]; then
 else
 	echo -e "\e[31mDiff_KO\e[0m"
 fi
-rm log_buff_file prog_output origin_output prog_output_e
+rm log_buff_file prog_output prog_output_e
 
 echo -e "\e[;32mivld_fd\e[0m"
 cc mains/ivld_fd.c $BF$SIZE $CFILES $FLAGS -g
@@ -100,7 +96,6 @@ if [ "${LEAK_RESULT}" = "${LEAK}" ];then
 else
 	cat log_buff_file
 fi
-cat cases/nl/* -e > origin_output
 cat prog_output -e > prog_output_e
 DIFF_RESULT=`cat prog_output_e | wc -l`
 if [ ${DIFF_RESULT} -eq 0 ]; then
@@ -108,7 +103,7 @@ if [ ${DIFF_RESULT} -eq 0 ]; then
 else
 	echo -e "\e[31mDiff_KO\e[0m"
 fi
-rm log_buff_file prog_output origin_output prog_output_e
+rm log_buff_file prog_output prog_output_e
 SIZE=1
 
 echo -e "\e[47;34m\e[1m"
