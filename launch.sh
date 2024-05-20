@@ -235,3 +235,4 @@ do
 	((SIZE++))
 done
 SIZE=1
+rm a.out
