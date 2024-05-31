@@ -95,11 +95,12 @@ run_test() {
 
 			echo "============diff_ko============" >> trace
 
-			echo "origin_output == $1" >> trace
+			echo "[origin_output == $1]" >> trace
 			cat origin_output >> trace
 			echo >> trace
-			echo "your_output" >> trace
+			echo "[your_output]" >> trace
 			cat prog_output >> trace
+			echo >> trace
 			echo "===============================" >> trace
 			echo >> trace
 		fi
