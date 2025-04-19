@@ -6,12 +6,6 @@
 
 extern int	find_minishell( void );
 
-typedef struct s_info
-{
-	char	**argv;
-	char	**env;
-}	t_info;
-
 t_info	init_info(char **argv, char **env)
 {
 	t_info	info;
@@ -27,11 +21,12 @@ char	**test_case( void )
 	{
 		TEST_CASE
 	};
+	char	*test_2[] = TEST_CASE_2;
 	return (NULL);
 }
 
 char	*test_1[] = {
-	"valgrind",
+	"/usr/bin/valgrind",
 	"--leak-check=full",
 	"--log-fd=1",
 	"../../minishell",
@@ -54,11 +49,11 @@ void	run_tester(t_info *info)
 	{
 		sleep(1);
 		write(to_mini_fd[1], "ls\n", 3);
-		sleep(1);
+		sleep(3);
 		write(to_mini_fd[1], "echo hi\n", 8);
-		sleep(1);
+		sleep(3);
 		write(to_mini_fd[1], "exit\n", 5);
-		sleep(1);
+		sleep(3);
 
 		//stdin
 		waitpid(pid, NULL, 0);
@@ -87,7 +82,7 @@ void	run_tester(t_info *info)
 		close(from_mini_fd[1]);
 		close(err_from_mini_fd[0]);
 		close(err_from_mini_fd[1]);
-		execve("valgrind", test_1, info->env);
+		printf("%d\n", execve("/usr/bin/valgrind", test_1, info->env));
 	}
 	return ;
 }
