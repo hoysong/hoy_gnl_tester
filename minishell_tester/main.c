@@ -1,89 +1,94 @@
+#include "minitester.h"
 #include <unistd.h>
-#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdlib.h>
 #include <sys/wait.h>
-#include "./minitester.h"
-#include <stdio.h>
 
-extern int	find_minishell( void );
+extern int	find_minishell(void);
 
-static t_info	init_info(char **argv, char **env)
-{
-	t_info	info;
-
-	info.argv = argv;
-	info.env = env;
-	return (info);
-}
-
-char	**test_case( void )
-{
-	char	*test[]=
-	{
-		TEST_CASE
-	};
-	char	*test_2[] = TEST_CASE_2;
-	return (NULL);
-}
-
-char	*test_1[] = {
-	"/usr/bin/valgrind",
-	"--leak-check=full",
-	"--log-fd=1",
-	"../../minishell",
+/* easy test. */
+char	*test_case_01[] = {
+	"ls",
+	"ls | cat -e",
 	NULL
 };
 
-static void	run_tester(t_info *info)
+typedef struct s_info
+{
+	int		to_shell[2];
+	int		from_shell[2];
+	int		err_from_shell[2];
+	char	**env;
+}	t_info;
+
+static inline void pipe_fd(t_info *info)
+{
+	pipe(info->to_shell);
+	pipe(info->from_shell);
+	pipe(info->err_from_shell);
+}
+
+static inline void	close_fd(t_info *info)
+{
+	close(info->err_from_shell[0]);
+	close(info->err_from_shell[1]);
+	close(info->from_shell[0]);
+	close(info->from_shell[1]);
+	close(info->to_shell[0]);
+	close(info->to_shell[1]);
+}
+
+void	select_shell(t_info *info, char *shell_name, char *test_case)
 {
 	pid_t	pid;
-	int		to_mini_fd[2];
-	int		from_mini_fd[2];
-	char	outputs[1024];
+	char	*argv[3] = 
+	{
+		shell_name,
+		test_case,
+		NULL
+	};
 
-	pipe(to_mini_fd);
-	pipe(from_mini_fd);
 	pid = fork();
-	if (pid) // 부모
+	if (pid)
 	{
-		sleep(1);
-		write(to_mini_fd[1], "ls\n", 3);
-		sleep(1);
-		write(to_mini_fd[1], "echo hi\n", 8);
-		sleep(1);
-		write(to_mini_fd[1], "exit\n", 5);
-		sleep(1);
-
-		//stdin
 		waitpid(pid, NULL, 0);
-		int len;
-		while (1)
-		{
-			len = read(from_mini_fd[0], outputs, sizeof(outputs) - 1);
-			outputs[len] = '\0';
-			printf("input_len: %d\n", len);
-			printf("%s\n", outputs);
-			if (len < 1023)
-				break ;
-		}
 	}
-	else // 자식
+	else
 	{
-		dup2(to_mini_fd[0], 0);
-		dup2(from_mini_fd[1], 1);
-		close(to_mini_fd[0]);
-		close(to_mini_fd[1]);
-		close(from_mini_fd[0]);
-		close(from_mini_fd[1]);
-		printf("%d\n", execve("/usr/bin/valgrind", test_1, info->env));
+		dup2(info->to_shell[0], 0);
+		dup2(info->from_shell[1], 1);
+		dup2(info->err_from_shell[1], 2);
+		execve(shell_name, argv, info->env);
+		exit(0);
 	}
-	return ;
+}
+
+static void	run_test_case(t_info *info, char **test_now)
+{
+	while (*test_now)
+	{
+		pipe_fd(info);
+		select_shell(info, "/usr/bin/bash", *test_now);
+		select_shell(info, "../../minishell", *test_now);
+		test_now++;
+		close_fd(info);
+	}
+}
+
+static void	start_prog( char **env )
+{
+	t_info	info;
+	char	**test_now;
+
+	info.env = env;
+	test_now = test_case_01;
+	run_test_case(&info, test_now);
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	if (find_minishell() == -1)
 		return (-1);
-	t_info info = init_info(argv, env);
-	run_tester(&info);
-	return (0);
+	else
+		start_prog(env);
 }

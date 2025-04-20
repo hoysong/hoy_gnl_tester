@@ -18,7 +18,7 @@ static int	type_chk(__mode_t mode)
 	return (0);
 }
 
-static int	get_file_type(char *argv)
+int	get_file_type(char *argv)
 {
 	int			return_code;
 	struct stat	stat_buf;
@@ -35,17 +35,18 @@ static int	get_file_type(char *argv)
 	return (type_chk(stat_buf.st_mode));
 }
 
+/* this function return -1 if minishell is not exist. */
 int	find_minishell( void )
 {
 	int	err_num = get_file_type("../../minishell");
 	if (err_num != 3)
 	{
-		put_str(RED, "ERR: program minishell not found.\n");
-		put_str(NO_COLOR, "├─note: locate tester repository in your minishell directory.\n");
-		put_str(NO_COLOR, "└─note: your program name must be minishell.\n");
+		put_color(RED, "ERR: program minishell not found.\n");
+		put_color(NO_COLOR, "├─note: locate tester repository in your minishell directory.\n");
+		put_color(NO_COLOR, "└─note: your program name must be minishell.\n");
 		return (-1);
 	}
 	else
-		put_str(GRN, "minishell found!\n");
+		put_color(GRN, "minishell found!\n");
 	return (1);
 }

@@ -11,12 +11,22 @@
 # define TEST_CASE_2 {"string", "string_2"}
 # endif
 
-typedef struct s_info
-{
-	char	**argv;
-	char	**env;
-}	t_info;
+//typedef struct s_info
+//{
+//	char	**argv;
+//	char	**env;
+//}	t_info;
 
-void	put_str(char *color, char *str);
+/*	put_color.
+ *	color options.
+ *	RED.
+ *	GRN.
+ *	YLO.
+ *	END.
+ *	NO_COLOR.
+ */
+
+void	put_color(char *str_color, char *str_to_put);
+int		get_file_type(char *argv);
 
 #endif
