@@ -1,4 +1,4 @@
-//#include "minitester.h"
+#include "minitester.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
@@ -10,9 +10,9 @@ extern int	find_minishell(void);
 
 /* easy test. */
 char	*test_case_01[] = {
-	"ls",
-	"ls | cat -e",
-	"exit",
+	"ls\n",
+	"ls | cat -e\n",
+	"exit\n",
 	NULL
 };
 
@@ -41,7 +41,7 @@ static inline void	close_fd(t_info *info)
 	close(info->to_shell[1]);
 }
 
-void	select_shell(t_info *info, char *shell_name, char *test_case)
+void	select_shell(t_info *info, char *shell_name, char **test_case)
 {
 	pid_t	pid;
 	char	*argv[3] = 
@@ -51,18 +51,16 @@ void	select_shell(t_info *info, char *shell_name, char *test_case)
 	};
 
 	pipe_fd(info);
-	printf("run shell\n");
 	pid = fork();
 	if (pid)
 	{
 		while (*test_case)
 		{
 			usleep(1000 * 500);
-			write(info->to_shell[1], test_case, strlen(test_case));
+			write(info->to_shell[1], *test_case, strlen(*test_case));
 			test_case++;
 		}
 		waitpid(pid, NULL, 0);
-		close_fd(info);
 	}
 	else
 	{
@@ -74,12 +72,18 @@ void	select_shell(t_info *info, char *shell_name, char *test_case)
 	}
 }
 
+void	diff_fd(t_info *info)
+{
+}
+
 static void	run_test_case(t_info *info, char **test_case)
 {
-	select_shell(info, "/usr/bin/bash", *test_case);
+	printf("RUN SHELL...\n");
+	select_shell(info, "/usr/bin/bash", test_case);
 	close_fd(info);
-	select_shell(info, "../../minishell", *test_case);
+	select_shell(info, "../../minishell", test_case);
 	close_fd(info);
+	printf("DONE!\n");
 }
 
 static void	start_prog( char **env )
