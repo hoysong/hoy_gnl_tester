@@ -1,8 +1,10 @@
-#include "minitester.h"
+//#include "minitester.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <string.h>
+#include <stdio.h>
 
 extern int	find_minishell(void);
 
@@ -10,6 +12,7 @@ extern int	find_minishell(void);
 char	*test_case_01[] = {
 	"ls",
 	"ls | cat -e",
+	"exit",
 	NULL
 };
 
@@ -44,14 +47,22 @@ void	select_shell(t_info *info, char *shell_name, char *test_case)
 	char	*argv[3] = 
 	{
 		shell_name,
-		test_case,
 		NULL
 	};
 
+	pipe_fd(info);
+	printf("run shell\n");
 	pid = fork();
 	if (pid)
 	{
+		while (*test_case)
+		{
+			usleep(1000 * 500);
+			write(info->to_shell[1], test_case, strlen(test_case));
+			test_case++;
+		}
 		waitpid(pid, NULL, 0);
+		close_fd(info);
 	}
 	else
 	{
@@ -63,26 +74,22 @@ void	select_shell(t_info *info, char *shell_name, char *test_case)
 	}
 }
 
-static void	run_test_case(t_info *info, char **test_now)
+static void	run_test_case(t_info *info, char **test_case)
 {
-	while (*test_now)
-	{
-		pipe_fd(info);
-		select_shell(info, "/usr/bin/bash", *test_now);
-		select_shell(info, "../../minishell", *test_now);
-		test_now++;
-		close_fd(info);
-	}
+	select_shell(info, "/usr/bin/bash", *test_case);
+	close_fd(info);
+	select_shell(info, "../../minishell", *test_case);
+	close_fd(info);
 }
 
 static void	start_prog( char **env )
 {
 	t_info	info;
-	char	**test_now;
+	char	**test_case;
 
 	info.env = env;
-	test_now = test_case_01;
-	run_test_case(&info, test_now);
+	test_case = test_case_01;
+	run_test_case(&info, test_case);
 }
 
 int	main(int argc, char **argv, char **env)
