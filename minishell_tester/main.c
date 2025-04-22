@@ -95,12 +95,31 @@ void	diff_fd(t_info *info)
 	while (1)
 	{
 		len = read(info->bash_fd.from_shell[0], outputs, sizeof(outputs));
+		outputs[len] = '\0';
+		printf("%s", outputs);
+		if (len < sizeof(outputs))
+			break ;
+	}
+
+	while (1)
+	{
+		printf("hi\n");
+		write(info->bash_fd.err_from_shell[1], "", strlen(""));
+		len = read(info->bash_fd.err_from_shell[0], outputs, sizeof(outputs));
+		printf("hi\n");
+		outputs[len] = '\0';
+		printf("%s", outputs);
+		if (len < sizeof(outputs))
+			break ;
 	}
 }
 
-void	get_mini_display_line(t_info *info)
+void	get_first_display_line(t_info *info, char *shell_name)
 {
+	char	buf[1024];
+
 	pipe_fd(info);
+	close_fd(info);
 }
 
 static void	run_test_case(t_info *info, char **test_case)
@@ -113,7 +132,7 @@ static void	run_test_case(t_info *info, char **test_case)
 	select_shell(info, "../../minishell", test_case);
 	printf("DONE!\n");
 	printf("diff fd now\n");
-	//diff_fd(info);
+	diff_fd(info);
 	close_fd(info);
 }
 
@@ -123,7 +142,8 @@ static void	start_prog( char **env )
 	char	**test_case;
 
 	info.env = env;
-	get_mini_display_line(&info);
+	//get_first_display_line(&info, "../../minishell");
+	//get_first_display_line(&info, "/usr/bin/bash");
 	test_case = test_case_01;
 	run_test_case(&info, test_case);
 }
