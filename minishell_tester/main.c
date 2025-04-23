@@ -7,6 +7,8 @@
 #include <stdio.h>
 
 extern int	find_minishell(void);
+extern void	show_banner( void );
+extern void	test_put_color( void );
 
 /* easy test. */
 char	*test_case_01[] = {
@@ -14,6 +16,12 @@ char	*test_case_01[] = {
 	"exit\n",
 	NULL
 };
+
+//char	*test_case_01[] = {
+//	"cd fuck\n",
+//	"exit\n",
+//	NULL
+//};
 
 typedef struct s_fds
 {
@@ -57,11 +65,10 @@ static inline void	close_fd(t_info *info)
 	close(info->bash_fd.to_shell[1]);
 }
 
-void	select_shell(t_info *info, char *shell_name, char **test_case)
+static void	select_shell(t_info *info, char *shell_name, char **test_case)
 {
 	pid_t	pid;
-	char	*argv[3] = 
-	{
+	char	*argv[2] = {
 		shell_name,
 		NULL
 	};
@@ -71,11 +78,15 @@ void	select_shell(t_info *info, char *shell_name, char **test_case)
 	{
 		while (*test_case)
 		{
-			usleep(1000 * 500);
+			usleep(1000 * 270);
 			write(info->fd_now->to_shell[1], *test_case, strlen(*test_case));
 			test_case++;
 		}
+		write(info->fd_now->to_shell[1], "", strlen(""));
 		waitpid(pid, NULL, 0);
+		/*write eof*/
+		write(info->fd_now->err_from_shell[1], "", strlen(""));
+		write(info->fd_now->from_shell[1], "", strlen(""));
 	}
 	else
 	{
@@ -87,14 +98,14 @@ void	select_shell(t_info *info, char *shell_name, char **test_case)
 	}
 }
 
-void	diff_fd(t_info *info)
+static void	show_fd(t_fds *fds)
 {
 	char	outputs[1024];
 	ssize_t	len = 0;
 
 	while (1)
 	{
-		len = read(info->bash_fd.from_shell[0], outputs, sizeof(outputs));
+		len = read(fds->from_shell[0], outputs, sizeof(outputs));
 		outputs[len] = '\0';
 		printf("%s", outputs);
 		if (len < sizeof(outputs))
@@ -103,18 +114,28 @@ void	diff_fd(t_info *info)
 
 	while (1)
 	{
-		printf("hi\n");
-		write(info->bash_fd.err_from_shell[1], "", strlen(""));
-		len = read(info->bash_fd.err_from_shell[0], outputs, sizeof(outputs));
-		printf("hi\n");
+		len = read(fds->err_from_shell[0], outputs, sizeof(outputs));
 		outputs[len] = '\0';
 		printf("%s", outputs);
 		if (len < sizeof(outputs))
 			break ;
 	}
+
+	printf("\n");
 }
 
-void	get_first_display_line(t_info *info, char *shell_name)
+static void	diff_fd(t_info *info)
+{
+	put_color(BLU_BG, true, " ");
+	put_color(BLU, true, " bash outputs\n");
+	show_fd(&info->bash_fd);
+
+	put_color(BLU_BG, true, " ");
+	put_color(BLU, true, " mini outputs\n");
+	show_fd(&info->mini_fd);
+}
+
+static void	get_first_display_line(t_info *info, char *shell_name)
 {
 	char	buf[1024];
 
@@ -124,14 +145,25 @@ void	get_first_display_line(t_info *info, char *shell_name)
 
 static void	run_test_case(t_info *info, char **test_case)
 {
+	char	**test_ptr = test_case;
+
+	put_color(TURQ_BG, true, "Test case is...\n");
+	while (*test_ptr)
+	{
+		put_color(TURQ, true, *test_ptr);
+		test_ptr++;
+	}
+	printf("\n");
 	pipe_fd(info);
-	printf("RUN SHELL...\n");
+	put_color(TURQ, true, "Testing...\n");
+
 	info->fd_now = &(info->bash_fd);
 	select_shell(info, "/usr/bin/bash", test_case);
+
 	info->fd_now = &(info->mini_fd);
 	select_shell(info, "../../minishell", test_case);
-	printf("DONE!\n");
-	printf("diff fd now\n");
+
+	put_color(TURQ, true, "DONE!\n");
 	diff_fd(info);
 	close_fd(info);
 }
@@ -142,14 +174,14 @@ static void	start_prog( char **env )
 	char	**test_case;
 
 	info.env = env;
-	//get_first_display_line(&info, "../../minishell");
-	//get_first_display_line(&info, "/usr/bin/bash");
-	test_case = test_case_01;
-	run_test_case(&info, test_case);
+	run_test_case(&info, test_case_01);
 }
 
 int	main(int argc, char **argv, char **env)
 {
+	system("clear");
+	show_banner();
+	put_color(TURQ_BG, false, "Finding minishell...\n");
 	if (find_minishell() == -1)
 		return (-1);
 	else

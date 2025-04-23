@@ -36,17 +36,19 @@ int	get_file_type(char *argv)
 }
 
 /* this function return -1 if minishell is not exist. */
+#include <unistd.h>
 int	find_minishell( void )
 {
 	int	err_num = get_file_type("../../minishell");
 	if (err_num != 3)
 	{
-		put_color(RED, "ERR: program minishell not found.\n");
-		put_color(NO_COLOR, "├─note: locate tester repository in your minishell directory.\n");
-		put_color(NO_COLOR, "└─note: your program name must be minishell.\n");
+		put_color(RED, true, "ERR: program minishell not found.\n");
+		put_color(TURQ, false, "├─note: locate tester repository in your minishell directory.\n");
+		put_color(TURQ, false, "└─note: your program name must be minishell.\n");
 		return (-1);
 	}
 	else
-		put_color(GRN, "minishell found!\n");
+		put_color(TURQ, true, "minishell found!\n");
+	write(1, "\n", 1);
 	return (1);
 }
