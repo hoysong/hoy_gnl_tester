@@ -1,28 +1,16 @@
-#include "minitester.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <string.h>
 #include <stdio.h>
+#include "minitester.h"
 
 extern int	find_minishell(void);
 extern void	show_banner( void );
 extern void	test_put_color( void );
 
 /* easy test. */
-char	*test_case_01[] = {
-	"ls | cat -e\n",
-	"exit\n",
-	NULL
-};
-
-//char	*test_case_01[] = {
-//	"cd fuck\n",
-//	"exit\n",
-//	NULL
-//};
-
 typedef struct s_fds
 {
 	int		to_shell[2];
@@ -143,7 +131,7 @@ static void	get_first_display_line(t_info *info, char *shell_name)
 	close_fd(info);
 }
 
-static void	run_test_case(t_info *info, char **test_case)
+static void	run_test_case( t_info *info, char **test_case )
 {
 	char	**test_ptr = test_case;
 
@@ -168,6 +156,12 @@ static void	run_test_case(t_info *info, char **test_case)
 	close_fd(info);
 }
 
+char	*test_case_01[] = {
+	"ls | cat -e\n",
+//	"exit\n",
+	NULL
+};
+
 static void	start_prog( char **env )
 {
 	t_info	info;
@@ -177,7 +171,7 @@ static void	start_prog( char **env )
 	run_test_case(&info, test_case_01);
 }
 
-int	main(int argc, char **argv, char **env)
+int	main( int argc, char **argv, char **env )
 {
 	system("clear");
 	show_banner();
