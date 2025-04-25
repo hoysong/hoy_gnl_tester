@@ -1,6 +1,6 @@
 #ifndef MINITESTER_H
-# include <stdbool.h>
 # define MINITESTER_H
+# define MINI_LOCATION "../../minishell"
 
 typedef struct s_fds
 {
