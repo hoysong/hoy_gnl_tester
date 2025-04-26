@@ -1,7 +1,7 @@
 + 테스터기가 이상하다면 여러분이 맞습니다.
 + songbird_tester 레포지토리를 여러분의 과제 디렉토리 안에 넣어주세요.
 # minishell_tester
-https://github.com/hoysong/songbird_tester/blob/main/minishell_test_builder/tester_01.png
+![tester_01](https://github.com/user-attachments/assets/57f3bfee-a955-4ca7-9fee-2a22fd1d7bd8)
 + minishell tester가 완성되었습니다.
 + main.c를 수정하여 직접 테스트 케이스를 bash와 비교할 수 있습니다.
 + 양식에 맞춰 작성하시고 bash compile.sh를 통해서 실행파일을 생성할 수 있습니다.
