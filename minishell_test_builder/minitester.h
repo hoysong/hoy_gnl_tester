@@ -1,6 +1,6 @@
 #ifndef MINITESTER_H
 # define MINITESTER_H
-# define MINI_LOCATION "../../minishell"
+# define MINI_LOCATION "../minishell"
 
 typedef struct s_fds
 {
