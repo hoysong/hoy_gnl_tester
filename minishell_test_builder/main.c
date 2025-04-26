@@ -316,7 +316,7 @@ char	*test_case_22[] = {
 
 char	*test_case_23[] = {
 	"export TESTER_LOCATION=$PWD\n"
-	"cd ../\n"
+	"cd ../../\n"
 	"export PATH=$PWD:$PATH\n",
 	"echo $PATH\n",
 	"minishell\n"
