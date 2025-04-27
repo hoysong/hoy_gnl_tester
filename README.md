@@ -2,11 +2,12 @@
 + songbird_tester 레포지토리를 여러분의 과제 디렉토리 안에 넣어주세요.
 # minishell_tester
 ![tester_01](https://github.com/user-attachments/assets/57f3bfee-a955-4ca7-9fee-2a22fd1d7bd8)
-+ main.c를 수정하여 테스트케이스를 생성할 수 있습니다.
-+ 양식에 맞춰 작성된 main.c를 'bash compile.sh'를 통해서 실행파일(a.out)을 생성할 수 있습니다.
-+ bash와 여러분의 minishell과 비교하여 출력을 확인할 수 있습니다.
-+ 해당 테스터는 fd별로 출력을 확인시켜줍니다.
-+ 현재 bash는 interactive mode로 실행이 됩니다.
++ 미니쉘 테스터 빌더입니다.
++ 테스터 레포지토리를 과제 디렉토리 안에서 클론하면 됩니다.
++ main.c를 편집하여 원하는 입력을 보낼 수 있습니다.
++ bash와 minishell의 출력을 fd별로 출력합니다.
++ bash는 대화형모드 옵션으로 실행됩니다.
++ "SIGQUIT\n", "SIGINT\n"를 통해서 minishell에 시그널을 보낼 수 있습니다.
 
 # get_next_line tester
 + gnl 테스터는.. 안정적이지 못하니 다른 테스터를 권장합니다.
