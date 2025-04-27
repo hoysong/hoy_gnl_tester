@@ -9,5 +9,6 @@
 + 현재 미니쉘 테스터의 bash는 interactive mode로 실행이 됩니다.
 
 # get_next_line tester
++ gnl 테스터는.. 안정적이지 못하니 다른 테스터를 권장합니다.
 + get next line  tester 는 무한루프를 탈출하지 못합니다.
 + 이상하게 오래걸리는 테스트케이스가 있다면 get next line에서 무한루프가 발생한 것입니다.
